@@ -22,6 +22,8 @@
 
 html, body, #content, #map {
 	height: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
@@ -32,7 +34,7 @@ body {
     margin: 0;
     overflow: auto;
     background: #F90;
-    padding: 50px;
+    padding: 50px 50px 110px;
 }
 
 h1 {
@@ -69,39 +71,49 @@ select, option, input {
     color: white;
     font-size: 80%;
 }
+select {
+	width:100%;
+}
+textarea {
+	margin: 0;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family: 'OpenSansRegular', sans-serif;
+	padding: 0 1em;
+}
 
 #content {
     width: 45%;
     float: left;
 /*     border: 2px solid green;     */
 }
+
+#debug, #chatLog {
+	overflow-y:auto;
+    text-align: left;
+    padding: 0 1em;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
 #debug {
-    /*background-color: #00E5FF;
-    color: black;*/
     background: #FF4400;
     color: #fff;
     border: 1px dashed black;
-    margin: 10px 10px 0;
-    overflow-y:auto;
-    text-align: left;
-    padding: 2em;
-    box-sizing: border-box;
+    min-height: 2em;
+    max-height: 5em;
+    padding-left: 300px;
 }
-
 #chatLog {
     background: #00E5FF;
     color: black;
-    border: 1px black;
-    margin: 10px 10px 0;
-    overflow-y:auto;
-    text-align: left;
-    padding: 2em;
-    box-sizing: border-box;
+    border: 1px dashed black;
+    margin: 2em 0 0;
+	width: 100%;
 }
 
-#debug-title {
-	margin-top: 20px;
-}
 #map {
 	float: right;
     width: 45%;
@@ -131,6 +143,22 @@ select, option, input {
 	width: 80%;
 }
 
+#footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+#debug-title {
+	position: absolute;
+	width: 280px;
+	background: #000;
+	color: #fff;
+	font-size: 130%;
+	text-align: right;
+	padding-right: 10px;
+}
+
 @media screen and (max-width: 960px) {
 	body {
 		padding: 10px;
@@ -141,7 +169,10 @@ select, option, input {
 		font-size: 250%;
 	}
 	h2 {
-		font-size: 100%;
+		font-size: 90%;
+	}
+	textarea {
+		padding: 0 7px;
 	}
 	#content, #map {
 		width: auto;
@@ -149,29 +180,40 @@ select, option, input {
 		height: auto;
 	}
 	#map {
-		height: 300px;
+		height: 200px;
 		margin-top: 30px;
+		margin-bottom: 5em; /*space for #debug */
 	}
 	.friends, .controls {
 		width: auto;
 	}
-	#debug {
-		margin: 0;
-		padding: 10px;
-		max-height: 10em;
-		font-size: 80%;
-	}
-	#chatLog {
+	#debug, #chatLog {
         margin: 0;
-        padding: 10px;
+        padding: 0 7px;
         max-height: 10em;
         font-size: 80%;
     }
+    #debug {
+		min-width: auto;
+		max-height: 5em;
+	}
+	#chatLog {
+		margin-top: 2em;
+	}
+	#debug-title {
+		background: rgba(0, 0, 0, 0.7);
+		color: #fff;
+		font-size: 70%;
+		font-family: 'OpenSansRegular';
+		position: static;
+		width: 100%;
+		text-align: left;
+	}
 }
 
 @media screen and (max-width: 1200px) and (min-width: 961px) {
 	body {
-		padding: 30px;
+		padding: 30px 30px 80px;
 	}
 	h1 {
 		font-size: 250%;
@@ -185,6 +227,7 @@ select, option, input {
 	#debug {
 		margin: 0;
 		padding: 10px;
+		padding-left: 300px;
 		font-size: 80%;
 	}
 	#chatLog {
