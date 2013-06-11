@@ -30,7 +30,7 @@ function findPZHs() {
     $('#pzhList').empty();
     $('#pzpList').empty();
     for(var i=0;i<webinos.session.getConnectedDevices().length;i++)
-        $('#pzhList').append($('<option id="' + webinos.session.getConnectedDevices()[i].id + '">' + webinos.session.getConnectedDevices()[i].id.replace(/[^_]*_/gi, '').replace(/\/[A-Za-z0-9]*$/gi, '') + '</option>'));       
+        $('#pzhList').append($('<option id="' + webinos.session.getConnectedDevices()[i].id + '">' + webinos.session.getConnectedDevices()[i].id.replace(/[^_]*_/gi, '').replace(/\/[A-Za-z0-9]*$/gi, '') + '</option>'));
     $('#pzhList').append($('<option id="' + webinos.session.getPZHId() + '">' + webinos.session.getPZPId().replace(/[^_]*_/gi, '').replace(/\/[A-Za-z0-9]*$/gi, '') + '</option>'));
 }
 
@@ -43,7 +43,7 @@ function findGeolocationServices() {
         onFound: function (service){
              if(service.serviceAddress.lastIndexOf($('#pzhList')[0].selectedOptions[0].id)!=-1){
                 geoServices.serviceArray[service.serviceAddress]=service;
-                $('#pzpList').append($('<option id="' + service.serviceAddress +'">' + service.serviceAddress.replace(/[^]*\//gi, '') + '</option>'));    
+                $('#pzpList').append($('<option id="' + service.serviceAddress +'">' + service.serviceAddress.replace(/[^]*\//gi, '') + '</option>'));
              }
         }
     });
@@ -54,7 +54,7 @@ function bindService() {
 //     console.log("***********");
 //     console.log($('#pzpList option:selected')[0].id);
 //     console.log(geoServices.serviceArray[$('#pzpList option:selected')[0].id]);
-//     console.log(geoServices.serviceArray);   
+//     console.log(geoServices.serviceArray);
 //     console.log("***********");
     try{
         geoServices.service = geoServices.serviceArray[$('#pzpList option:selected')[0].id];
@@ -117,7 +117,7 @@ function findPositionOf(service){
 }
 
 
-function findSingleLocation() {  
+function findSingleLocation() {
     if($('#pzpList option:selected')[0] === undefined){
         debugLog('<li class="error">' + "Error: not bound, yet" + '</li>');
         return false;
@@ -205,23 +205,27 @@ function findMyLocation(){
 }
 
 
-function resizeDebug() {
+function resizeChat() {
 	if(window.innerWidth > 960) {
-		App.debugEl[0].style.maxHeight = window.innerHeight - parseInt(App.body.css('padding-bottom'),10) - App.debugEl[0].offsetTop + 'px';
+		App.chatEl[0].style.maxHeight = window.innerHeight - parseInt(App.body.css('padding-bottom'),10) - (App.chatText.height()+2) - App.chatEl[0].offsetTop + 'px'; //+2 is for the 1px border x2
 	}
 }
 
 function debugLog(msg) {
-	if(!App.debugMaxHeightSet) {
-		resizeDebug();
-		App.debugMaxHeightSet = true;
-	}
 	App.debugEl.append(msg);
 	App.debugEl.scrollTop(App.debugEl[0].scrollHeight); //scroll to bottom
 }
 
+function chatLog(msg) {
+	if(!App.chatMaxHeightSet) {
+		resizeChat();
+		App.chatMaxHeightSet = true;
+	}
+	App.chatEl.append(msg);
+	App.chatEl.scrollTop(App.chatEl[0].scrollHeight); //scroll to bottom
+}
 
-var App = {};
+var App = {}; //global object/namespace
 $(document).ready(function(){
     $("#btnFindSingleLocation").click(findSingleLocation);
     $("#btnFindGeolocation").click(findPZHs);
@@ -231,13 +235,15 @@ $(document).ready(function(){
     drawEmptyMap(4);
     webinos.session.addListener('registeredBrowser', findPZHs);
 
-	//for resizeDebug;
-    App.debugEl = $('#debug');
+	//for resizeChat & debug/chat append;
+	App.debugEl = $('#debug');
+    App.chatEl = $('#chatLog');
+    App.chatText = $('#chatBox');
 	App.body = $(document.body);
 });
 
 $(window).resize(function() {
-	resizeDebug();
+	resizeChat();
 });
 
 function logWebinos(){
@@ -254,26 +260,26 @@ function logWebinos(){
     console.log('webinos.session.getConnectedDevices()');
     console.log(webinos.session.getConnectedDevices());
     console.log("---");
-    console.log('webinos.session.getPZPId()');    
-    console.log(webinos.session.getPZPId());    
+    console.log('webinos.session.getPZPId()');
+    console.log(webinos.session.getPZPId());
     console.log("---");
-    console.log('webinos.session.getPZHId()');    
-    console.log(webinos.session.getPZHId());    
+    console.log('webinos.session.getPZHId()');
+    console.log(webinos.session.getPZHId());
     console.log("---");
-    console.log('webinos.session.getFriendlyName()');    
+    console.log('webinos.session.getFriendlyName()');
     console.log(webinos.session.getFriendlyName());
     console.log("---");
-    console.log('webinos.session.isConnected()');    
-    console.log(webinos.session.isConnected());      
+    console.log('webinos.session.isConnected()');
+    console.log(webinos.session.isConnected());
     console.log("---");
-    console.log('webinos.session.getSessionId()');    
+    console.log('webinos.session.getSessionId()');
     console.log(webinos.session.getSessionId());
     console.log("---");
-    console.log('webinos.session.getWebinosVersion()');    
-    console.log(webinos.session.getWebinosVersion());    
+    console.log('webinos.session.getWebinosVersion()');
+    console.log(webinos.session.getWebinosVersion());
     console.log("---");
-    console.log('webinos.session.getServiceLocation()');    
-    console.log(webinos.session.getServiceLocation());    
+    console.log('webinos.session.getServiceLocation()');
+    console.log(webinos.session.getServiceLocation());
     console.log("---");
     console.log('webinos.session');
     console.log(webinos.session);
