@@ -87,6 +87,18 @@ select, option, input {
     padding: 2em;
     box-sizing: border-box;
 }
+
+#chatLog {
+    background: #00E5FF;
+    color: black;
+    border: 1px black;
+    margin: 10px 10px 0;
+    overflow-y:auto;
+    text-align: left;
+    padding: 2em;
+    box-sizing: border-box;
+}
+
 #debug-title {
 	margin-top: 20px;
 }
@@ -149,6 +161,12 @@ select, option, input {
 		max-height: 10em;
 		font-size: 80%;
 	}
+	#chatLog {
+        margin: 0;
+        padding: 10px;
+        max-height: 10em;
+        font-size: 80%;
+    }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 961px) {
@@ -169,4 +187,9 @@ select, option, input {
 		padding: 10px;
 		font-size: 80%;
 	}
+	#chatLog {
+        margin: 0;
+        padding: 10px;
+        font-size: 80%;
+    }
 }

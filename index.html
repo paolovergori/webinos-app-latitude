@@ -27,15 +27,16 @@
     <link rel="stylesheet" type="text/css" href="./css/latitude.css" />
     <meta name="viewport" content="width=device-width, user-scalable=no">
   <body>
+
 	<div id="content" align="center">
 		<h1>Webinos Latitude</h1>
 		<div class="friends">
 			<div>
-				<h2>connected friends :</h2>
+				<h2>friends you know:</h2>
 				<select id="pzhList" size="3" style="width:100%;" onchange="findGeolocationServices();"> <option> </option> </select><br>
 			</div>
 			<div>
-				<h2>friend's devices :</h2>
+				<h2>online friends' devices:</h2>
 				<select id="pzpList" size="3" style="width:100%;" onchange="bindService();"> <option> </option> </select><br>
 			</div>
 		</div>
@@ -50,9 +51,14 @@
 
 		<h2 id="debug-title">Console information:</h2>
 		<div id="debug"></div>
+        
+        <div id="chatLog"><p>chat message</p>
+<p>chat message</p><p>chat message</p><p>chat message</p><p>chat message</p><p>chat message</p><p>chat message</p><p>chat message</p><p>chat message</p><p>chat message</p>
+        </div>
+        <div id="chatBox"><textarea rows="2" width="100%">comment</textarea></div>
 	</div>
 
-	<div id="map"></div>
+	<div id="map"></div>    
+
   </body>
 </html>
-
